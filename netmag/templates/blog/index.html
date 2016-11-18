@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Blog Archive {% endblock %}
+
+{% block content %}
+<br><br>
+<nav class="navbar navbar-inverse navbar-fixed-top"  >
+	<div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" style="padding-left: 30px;" >inspiron</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right " style="padding-right: 30px">
+        <li><a href="">Quotes</a></li>
+        <li><a href="">News</a></li>
+        <li><a href="">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+
+</nav>
+
+<!-------------------slider------->
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+  
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1"></div>
+      <div class="hero">
+        <hgroup>       
+            <h2>Success Requires Scarifices </h2>
+            <h4>-Legend Forever</h4>
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button">Subscribe for more</button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-2"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1>Change your Attitude</h1>        
+        </hgroup>       
+        <button class="btn btn-hero btn-lg" role="button">Subscribe for more</button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-3"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1>Gain Altitude</h1>        
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button">Subscribe for more</button>
+      </div>
+    </div>
+  </div> 
+<!--- - - - - - endslider - - - - - -->
+
+<div class="text-center page-header" style="color: #00BCD4"><h2> Inspirational Quotes For Life !!!!  </h2></div>
+<div class="row">
+{% for post in posts %}
+<div class="col-xs-18 col-sm-6 col-md-3">
+          <div class="thumbnail">
+
+            <div class="caption">
+                <div class="well"><h3 class="text-center">{{post.title}}</h3></div>
+					<h4 style="font-weight: 200;color: #fb8c00">{{post.description|truncatechars:35}}</h4>
+						{{post.content|safe|truncatechars:200}}
+					<p>
+						<div style="font-weight: bold"><br/>Posted on <time datetime="{{post.created|date:"c"}}">{{post.created|date}}</time></div>
+					</p>
+					<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#id{{post.id}}">Read More</button>
+<!-------------modal------- -->
+<div class="modal fade" id="id{{post.id}}" role="dialog">
+<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">{{post.title}}</h3>
+        </div>
+        <div class="modal-body">
+        <h4 style="font-weight: 200;color: #fb8c00">{{post.description}}</h4>
+          <p style="text-align: justify;">{{post.content|safe}}</p>
+          <p><div style="font-weight: bold"><br/>Posted on <time datetime="{{post.created|date:"c"}}">{{post.created|date}}</time></div></p>
+        </div>
+        <div class="modal-footer">
+          <a  class="btn btn-default" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+      
+    </div>
+    
+ </div>
+  <!--end modal-->
+</div>
+</div>
+</div>
+{% endfor %}
+
+</div>
+<div class="text-center page-header" style="color: #66bb6a;"><h2> Trending News !!!!  </h2></div>
+<div class="row">
+{% for blog in bloglists %}
+<div class="col-xs-18 col-sm-6 col-md-3">
+          <div class="thumbnail">
+
+            <div class="caption">
+                <div class="well"><h3 class="text-center">{{blog.title1}}</h3></div>
+					<h4 style="font-weight: 200;color: #fb8c00">{{blog.description1|truncatechars:35}}</h4>
+						{{blog.content1|safe|truncatechars:200}}
+					<p>
+						<div style="font-weight: bold"><br/>Posted on <time datetime="{{blog.created1|date:"c"}}">{{blog.created1|date}}</time></div>
+					</p>
+					<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#id{{blog.id}}">Read More</button>
+<!-------------modal------- -->
+<div class="modal fade" id="id{{blog.id}}" role="dialog">
+<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">{{blog.title1}}</h3>
+        </div>
+        <div class="modal-body">
+        <h4 style="font-weight: 200;color: #fb8c00">{{blog.description1}}</h4>
+          <p style="text-align: justify;">{{blog.content1|safe}}</p>
+          <p><div style="font-weight: bold"><br/>Posted on <time datetime="{{blog.created1|date:"c"}}">{{blog.created1|date}}</time></div></p>
+        </div>
+        <div class="modal-footer">
+          <a  class="btn btn-default" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+      
+    </div>
+    
+ </div>
+  <!--end modal-->
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+<!--- footer-->
+<footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <ul class="social-network social-circle">
+                             <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                             <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                             <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                             <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                             <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                            Supported by: Department of Computer Science, PACE | FSMK
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
